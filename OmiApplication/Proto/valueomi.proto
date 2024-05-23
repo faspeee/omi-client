@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "OmiApplication.Proto";
+import "google/protobuf/empty.proto";
+import "Proto/common.proto";
+
+package value.omi;
+
+service ValueOmiGrpc {
+  rpc allValueOmi (google.protobuf.Empty) returns (stream ResponseValueOmi) {}
+  rpc allValueOmiWithCondition(RequestValueWithCondition) returns(stream ResponseValueOmi){}
+  rpc processFileWithConditionValue(RequestValueWithCondition) returns(stream ResponseValueOmi){}
+}
+
+message ResponseValueOmi {
+  common.omiValueAndZone.OmiValue omiValue = 1;
+}
+message RequestValueWithCondition{
+  string province = 1;
+  string city = 2;
+  string region = 3;
+}
